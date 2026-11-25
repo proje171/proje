@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "postinstall": "prisma generate",
+    "db:setup": "node -e \"require('node:fs').mkdirSync('.data',{recursive:true})\" && prisma db push --skip-generate",
+    "predev": "npm run db:setup",
+    "prestart": "npm run db:setup",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../.data/workspace.db"
+}
+
+model BusinessRecord {
+  placeId            String   @id
+  name               String
+  category           String
+  address            String
+  data               String
+  status             String?
+  note               String   @default("")
+  followUpAt         String?
+  emailConsentSource String?
+  emailConsentDate   String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model SearchRecord {
+  id          String   @id
+  query       String
+  category    String
+  radius      Int
+  businessIds String
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
